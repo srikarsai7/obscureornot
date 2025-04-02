@@ -9,9 +9,6 @@ export default function GameOver({ score }: { score: number }) {
       <p className="font-semibold">Score: {score}</p>
 
       <div className="flex gap-4">
-        <a href = '/' className="bg-green-700 hover:bg-green-600 text-white px-4 py-2 rounded">
-          Home
-        </a>
         <a href = '/game' className="bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded">
           Play Again
         </a>

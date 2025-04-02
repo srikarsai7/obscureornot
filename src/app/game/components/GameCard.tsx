@@ -18,12 +18,11 @@ interface GameCardProps {
   score: number;
   setScoreAction: (newscore: number) => void;
   country: string;
-  category: string;
   obscure: boolean;
   onNextAction: () => Promise<void>;
 }
 
-export default function GameCard({ item1, item2, score, setScoreAction, country, category, obscure, onNextAction }: GameCardProps) {
+export default function GameCard({ item1, item2, score, setScoreAction, country, obscure, onNextAction }: GameCardProps) {
   const [isGameOver, setIsGameOver] = useState(false)
   const [revealed, setRevealed] = useState(false)
 
@@ -47,7 +46,7 @@ export default function GameCard({ item1, item2, score, setScoreAction, country,
     <div className="bg-[#2b2b2b] text-white w-full h-full p-8 flex flex-col items-center justify-between">
       {/* Header */}
       <div className="w-full flex justify-between items-center">
-        <img src="/logo.png" alt="Logo" width={300} height={200} className="items-center" />
+        <Image src="/logo.png" alt="Logo" width={300} height={200} className="items-center" />
         <div className="flex items-center gap-4">
           <p className="text-2xl font-semibold bg-zinc-800 px-6 py-2 rounded-full">
             Score: {score}

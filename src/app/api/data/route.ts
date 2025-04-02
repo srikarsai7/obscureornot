@@ -48,7 +48,7 @@ const getSearchInterest = async (keyword: string, geo: string): Promise<number> 
       startTime: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30), // last 30 days
     })
     const parsed = JSON.parse(results)
-    const values = parsed.default.timelineData.map((d: any) => d.value[0])
+    const values = parsed.default.timelineData.map((d: { value: number[] }) => d.value[0])
     const avg = values.reduce((a: number, b: number) => a + b, 0) / values.length
     return avg
   } catch (err) {

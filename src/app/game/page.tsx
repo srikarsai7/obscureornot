@@ -57,7 +57,6 @@ export default function GamePage() {
         item1={item1}
         item2={item2}
         country={country}
-        category={category}
         obscure={obscure}
         score={score}
         onNextAction={fetchNewQuestion} 

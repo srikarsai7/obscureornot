@@ -19,8 +19,8 @@ export default function Home() {
       <main className="text-center max-w-2xl space-y-6">
         <h1 className="text-4xl sm:text-5xl font-bold">Welcome to <span className="text-green-400">Obscure</span> <span className="text-red-400">or Not</span></h1>
         <p className="text-lg sm:text-xl text-zinc-300">
-          You'll be shown two things. Decide if the left one is <span className="font-semibold text-green-300">less searched</span> than the right one.
-          Choose <span className="text-green-500 font-medium">"Obscure"</span> if you think it's less searched, or <span className="text-red-400 font-medium">"Not Obscure"</span> if it’s more popular in the mentioned country.
+          You will be shown two things. Decide if the left one is <span className="font-semibold text-green-300">less searched</span> than the right one.
+          Choose <span className="text-green-500 font-medium">Obscure</span> if you think it is less searched, or <span className="text-red-400 font-medium">Not Obscure</span> if it is more popular in the mentioned country.
         </p>
 
         <a 
