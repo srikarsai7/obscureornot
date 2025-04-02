@@ -42,16 +42,12 @@ export default function GameCard({ item1, item2, score, setScoreAction, country,
   }
 
   return (
-    <div className="bg-zinc-900 text-white w-full h-full p-8 flex flex-col items-center justify-between">
+    <div className="bg-[#2b2b2b] text-white w-full h-full p-8 flex flex-col items-center justify-between">
       {/* Header */}
       <div className="w-full flex justify-between items-center">
-        <h1 className="text-4xl font-bold">
-          <span className="text-green-500">Obscure</span> <span className="text-red-500">or Not</span>
-        </h1>
+      <img src="/logo.png" alt="Logo" width={300} 
+                height={200} className='items-center'/>
         <div className="flex items-center gap-4">
-          <span className="text-xl font-medium bg-zinc-800 px-4 py-1 rounded-full">
-            Category: {category}
-          </span>
           <p className="text-2xl font-semibold bg-zinc-800 px-6 py-2 rounded-full">
             Score: {score}
           </p>

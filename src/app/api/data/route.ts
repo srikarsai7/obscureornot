@@ -50,9 +50,11 @@ export async function GET() {
     const randomCategory = topics[Math.floor(Math.random() * topics.length)]
 
     // Choose two random items from the category
-    const shuffledItems = [...randomCategory.items].sort(() => 0.5 - Math.random())
-    const item1 = shuffledItems[0]
-    const item2 = shuffledItems[1]
+    const allItems = topics.flatMap(topic => topic.items)
+
+const shuffled = [...allItems].sort(() => 0.5 - Math.random())
+const item1 = shuffled[0]
+const item2 = shuffled[1]
 
     // Choose a random country
     const country = countries[Math.floor(Math.random() * countries.length)]

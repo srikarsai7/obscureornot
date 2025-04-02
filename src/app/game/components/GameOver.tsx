@@ -2,10 +2,9 @@
 
 export default function GameOver({ score }: { score: number }) {
   return (
-    <div className="bg-zinc-900 w-screen h-screen text-white w-[400px] p-6 rounded-md shadow-lg flex flex-col items-center space-y-6">
-      <h1 className="text-2xl font-bold">
-        <span className="text-green-500">Obscure</span> <span className="text-red-500">or Not</span>
-      </h1>
+    <div className="bg-[#2b2b2b] w-screen h-screen text-white w-[400px] p-6 rounded-md shadow-lg flex flex-col items-center space-y-6">
+      <img src="/logo.png" alt="Logo" width={300} 
+                height={200} className='items-center'/>
       <p className="text-lg">Game Over</p>
       <p className="font-semibold">Score: {score}</p>
 
