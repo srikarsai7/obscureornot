@@ -8,10 +8,12 @@ interface GameCardProps {
   item1: {
     name: string;
     image: string;
+    interest: number;
   };
   item2: {
     name: string;
     image: string;
+    interest: number;
   };
   score: number;
   setScoreAction: (newscore: number) => void;
@@ -23,20 +25,20 @@ interface GameCardProps {
 
 export default function GameCard({ item1, item2, score, setScoreAction, country, category, obscure, onNextAction }: GameCardProps) {
   const [isGameOver, setIsGameOver] = useState(false)
+  const [revealed, setRevealed] = useState(false)
 
-  // Handle answer
   const handleAnswer = (selectedObscure: boolean) => {
-    if (selectedObscure === obscure) {
-      // Correct answer
-      setScoreAction(score + 1)
-      onNextAction()
-    } else {
-      // Wrong answer - game over
-      setIsGameOver(true)
-    }
+    setRevealed(true)
+    setTimeout(() => {
+      if (selectedObscure === obscure) {
+        setScoreAction(score + 1)
+        onNextAction()
+      } else {
+        setIsGameOver(true)
+      }
+    }, 2000)
   }
 
-  // If game is over, render the GameOver component
   if (isGameOver) {
     return <GameOver score={score} />
   }
@@ -45,8 +47,7 @@ export default function GameCard({ item1, item2, score, setScoreAction, country,
     <div className="bg-[#2b2b2b] text-white w-full h-full p-8 flex flex-col items-center justify-between">
       {/* Header */}
       <div className="w-full flex justify-between items-center">
-      <img src="/logo.png" alt="Logo" width={300} 
-                height={200} className='items-center'/>
+        <img src="/logo.png" alt="Logo" width={300} height={200} className="items-center" />
         <div className="flex items-center gap-4">
           <p className="text-2xl font-semibold bg-zinc-800 px-6 py-2 rounded-full">
             Score: {score}
@@ -68,6 +69,11 @@ export default function GameCard({ item1, item2, score, setScoreAction, country,
               />
             </div>
             <p className="text-xl font-bold">{item1.name}</p>
+            {revealed && (
+              <p className="text-sm text-zinc-400 mt-1">
+                Interest: {item1.interest.toFixed(1)}
+              </p>
+            )}
           </div>
           
           <div className="flex flex-col items-center mx-8">
@@ -86,6 +92,11 @@ export default function GameCard({ item1, item2, score, setScoreAction, country,
               />
             </div>
             <p className="text-xl font-bold">{item2.name}</p>
+            {revealed && (
+              <p className="text-sm text-zinc-400 mt-1">
+                Interest: {item2.interest.toFixed(1)}
+              </p>
+            )}
           </div>
         </div>
       </div>
@@ -95,12 +106,14 @@ export default function GameCard({ item1, item2, score, setScoreAction, country,
         <button 
           className="bg-green-700 hover:bg-green-600 text-white px-8 py-4 rounded-lg text-xl font-bold shadow-lg transition-all duration-200 hover:scale-105" 
           onClick={() => handleAnswer(true)}
+          disabled={revealed}
         >
           Obscure
         </button>
         <button 
           className="bg-red-700 hover:bg-red-600 text-white px-8 py-4 rounded-lg text-xl font-bold shadow-lg transition-all duration-200 hover:scale-105" 
           onClick={() => handleAnswer(false)}
+          disabled={revealed}
         >
           Not Obscure
         </button>

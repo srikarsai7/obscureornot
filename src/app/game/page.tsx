@@ -6,6 +6,7 @@ import GameCard from './components/GameCard'
 interface Item {
   name: string;
   image: string;
+  interest: number;
 }
 
 export default function GamePage() {
@@ -52,16 +53,16 @@ export default function GamePage() {
     <main className="w-screen h-screen bg-zinc-800">
       {item1 && item2 && (
         <GameCard
-          key={key}
-          item1={item1}
-          item2={item2}
-          country={country}
-          category={category}
-          obscure={obscure}
-          score={score}
-            onNextAction={fetchNewQuestion} 
-            setScoreAction={(newscore: number) => setScore(newscore)} 
-          />
+        key={key}
+        item1={item1}
+        item2={item2}
+        country={country}
+        category={category}
+        obscure={obscure}
+        score={score}
+        onNextAction={fetchNewQuestion} 
+        setScoreAction={(newscore: number) => setScore(newscore)} 
+      />
       )}
     </main>
   )
