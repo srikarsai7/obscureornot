@@ -46,14 +46,22 @@ const getSearchInterest = async (keyword: string, geo: string): Promise<number> 
       keyword,
       geo,
       startTime: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30), // last 30 days
-    })
-    const parsed = JSON.parse(results)
-    const values = parsed.default.timelineData.map((d: { value: number[] }) => d.value[0])
-    const avg = values.reduce((a: number, b: number) => a + b, 0) / values.length
-    return avg
+    });
+
+    if (!results) {
+      console.error('No results returned');
+      return 0;
+    }
+
+    const parsed = JSON.parse(results);
+    console.log(parsed);
+    const values = parsed.default.timelineData.map((d: { value: number[] }) => d.value[0]);
+    const avg = values.reduce((a: number, b: number) => a + b, 0) / values.length;
+    return avg;
+
   } catch (err) {
-    console.error(`Failed to get interest for ${keyword}:`, err)
-    return 0
+    console.error(`Failed to get interest for ${keyword}:`, err);
+    return 0; // Return a default or an error code that makes sense for your app
   }
 }
 
