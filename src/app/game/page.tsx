@@ -1,14 +1,68 @@
-import Image from "next/image";
+'use client'
 
-export default function game() {
+import { useEffect, useState } from 'react'
+import GameCard from './components/GameCard'
+
+interface Item {
+  name: string;
+  image: string;
+}
+
+export default function GamePage() {
+  const [item1, setItem1] = useState<Item | null>(null)
+  const [item2, setItem2] = useState<Item | null>(null)
+  const [country, setCountry] = useState('')
+  const [category, setCategory] = useState('')
+  const [obscure, setObscure] = useState<boolean>(false)
+  const [loading, setLoading] = useState(true)
+  const [key, setKey] = useState(0)
+  const [score, setScore] = useState(0)
+
+  const fetchNewQuestion = async () => {
+    setLoading(true)
+    try {
+      const res = await fetch('/api/data')
+      const data = await res.json()
+      setItem1(data.item1)
+      setItem2(data.item2)
+      setCountry(data.country)
+      setCategory(data.category)
+      setObscure(data.obscure)
+      setKey(prev => prev + 1)
+    } catch (error) {
+      console.error('Error fetching data:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchNewQuestion()
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-zinc-800 text-white">
+        <p className="text-2xl">Loading...</p>
+      </div>
+    )
+  }
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <h1 className="center"> Welcome to Obscure or Not</h1>
-        <p>If you believe the shown fact is false choose obscure if you believe it's true choose Obscure.</p>
-        <div className="flex flex-col gap-8">
-        </div>
-      </main>
-    </div>
-  );
+    <main className="w-screen h-screen bg-zinc-800">
+      {item1 && item2 && (
+        <GameCard
+          key={key}
+          item1={item1}
+          item2={item2}
+          country={country}
+          category={category}
+          obscure={obscure}
+          score={score}
+            onNextAction={fetchNewQuestion} 
+            setScoreAction={(newscore: number) => setScore(newscore)} 
+          />
+      )}
+    </main>
+  )
 }
