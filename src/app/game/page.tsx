@@ -13,7 +13,6 @@ export default function GamePage() {
   const [item1, setItem1] = useState<Item | null>(null)
   const [item2, setItem2] = useState<Item | null>(null)
   const [country, setCountry] = useState('')
-  const [category, setCategory] = useState('')
   const [obscure, setObscure] = useState<boolean>(false)
   const [loading, setLoading] = useState(true)
   const [key, setKey] = useState(0)
@@ -27,7 +26,6 @@ export default function GamePage() {
       setItem1(data.item1)
       setItem2(data.item2)
       setCountry(data.country)
-      setCategory(data.category)
       setObscure(data.obscure)
       setKey(prev => prev + 1)
     } catch (error) {
